@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Résultats du calcul</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+    .card {
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .card-header {
+      background-color: #f8f9fa;
+      font-weight: bold;
+    }
+    .result-table {
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-4">
+  <!-- En-tête -->
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <h2>Résultats du calcul de diffusion</h2>
+    </div>
+    <div class="col-md-4 text-right">
+      <a href="{{ url_for('calcul') }}" class="btn btn-primary">Nouveau calcul</a>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-secondary ml-2">Tableau de bord</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      Résultats
+    </div>
+    <div class="card-body">
+      <div class="result-table">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th width="30%">Fraction Xa</th>
+              <td>{{ Xa }}</td>
+            </tr>
+            <tr>
+              <th>Température (K)</th>
+              <td>{{ T }}</td>
+            </tr>
+            <tr>
+              <th>ln(Dab)</th>
+              <td>{{ lnDab|round(6) }}</td>
+            </tr>
+            <tr>
+              <th>Coefficient de diffusion (Dab)</th>
+              <td>{{ Dab|round(6) }}</td>
+            </tr>
+            <tr>
+              <th>Erreur (%)</th>
+              <td>{{ erreur|round(2) }}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
