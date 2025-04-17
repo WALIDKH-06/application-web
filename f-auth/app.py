@@ -7,8 +7,10 @@ import string
 from flask_mail import Mail, Message
 from numpy import log as Ln, exp as e
 import re
+import os 
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -19,9 +21,9 @@ app.config['MAIL_SUPPRESS_SEND'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'walidekhaoudi@gmail.com'
-app.config['MAIL_PASSWORD'] = 'ybxm vszq saap ajql'
-app.config['MAIL_DEFAULT_SENDER'] = 'walidekhaoudi@gmail.com'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME', 'default_email@gmail.com')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD', 'default_password')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', 'default_email@gmail.com')
 
 db = SQLAlchemy(app)
 mail = Mail(app)
