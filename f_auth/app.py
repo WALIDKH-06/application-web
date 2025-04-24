@@ -300,6 +300,9 @@ def calcul_diffusion(Xa, T):
 
 @app.route('/calcul', methods=["GET","POST"])
 def calcul():
+    if 'user_id' not in session:
+        flash("Veuillez vous connecter", "warning")
+        return redirect(url_for('login'))
     if request.method=="POST":
         try:
             Xa = float(request.form["Xa"])
@@ -314,6 +317,9 @@ def calcul():
 
 @app.route("/resultat")
 def resultat():
+    if 'user_id' not in session:
+        flash("Veuillez vous connecter", "warning")
+        return redirect(url_for('login'))
     Xa = float(request.args.get('Xa'))
     T = float(request.args.get('T'))
     Dab = float(request.args.get('Dab'))
